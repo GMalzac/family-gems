@@ -1,5 +1,8 @@
 <div class="container">
   <h1>Conversations</h1>
+  <% if user_signed_in? %>
+    <%= link_to "Create a new group", new_group_path %>
+  <% end %>
   <ul>
     <% @conversations.each do |convo| %>
       <li><%= convo.title %></li>
