@@ -1,0 +1,7 @@
+<h1>Create a new gem</h1>
+<%= @conversation.inspect %>
+<%= form_with model: [:group, @conversation] do |f| %>
+  <%= f.text_field :title %>
+  <%= f.hidden_field :group_id %>
+  <%= f.submit "Create gem", class: "btn btn-primary" %>
+<% end %>

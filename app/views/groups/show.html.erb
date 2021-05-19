@@ -1,3 +1,8 @@
 <h1><%= @group.name %></h1>
 <h2>Admin: <%= @group.user.nick_name %></h2>
-
+<%= link_to "Add a new gem", new_group_conversation_path(@group), class: "btn btn-primary"  %>
+<ul>
+  <% @conversations.each do |convo| %>
+    <li><%= convo.title %></li>
+  <% end %>
+</ul>

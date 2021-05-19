@@ -16,6 +16,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
+    @conversations = @group.conversations
   end
 
   private
