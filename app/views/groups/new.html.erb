@@ -9,12 +9,5 @@
 <%= form_with model: @group do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
-  <br>
-  <%= f.fields_for :members, @group.members do |gmf| %>
-    <%= gmf.label :nick_name %>
-    <%= gmf.text_field :nick_name %>
-    <br>
-  <% end %>
-  <br>
   <%= f.submit "Create group", class: "btn btn-primary" %>
 <% end %>
