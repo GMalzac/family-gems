@@ -9,20 +9,15 @@ class ConversationsController < ApplicationController
 
   def new
     @group = Group.find(params[:group_id])
-    @members = @group.members.order(nick_name: :asc)
     @conversation = Conversation.new(group_id: params[:group_id])
-    10.times { @conversation.messages.build }
   end
 
   def create
     @conversation = Conversation.new(conversation_params)
     @conversation.user_id = current_user.id
+    @group = Group.find(params[:group_id])
     if @conversation.save
-      @conversation.messages.each do |message|
-        message.conversation = @conversation
-        message.save
-      end
-      redirect_to group_path(@conversation.group_id)
+      redirect_to new_group_conversation_message_path(@group, @conversation)
     else
       render :new
     end

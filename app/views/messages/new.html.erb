@@ -1,0 +1,23 @@
+<h1>Create a new message</h1>
+
+<% if @message.errors.any? %>
+  <% @message.errors.full_messages.each do |message|%>\
+  <h3><%= message %> </h3>
+  <%end%>
+<%end%>
+
+<ul>
+  <% @messages.each do |message| %>
+    <li><%= message.member.nick_name %> - <%= message.content %></li>
+  <% end %>
+</ul>
+
+<%= form_with model: [:group, :conversation, @message] do |f| %>
+  <%= f.label :member %>
+  <%= f.collection_select :member_id, @members, :id, :nick_name  %>
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+  <%= f.hidden_field :conversation_id %>
+  <%= f.submit "Add message to conversation", class: "btn btn-primary" %>
+  <br>
+<% end %>

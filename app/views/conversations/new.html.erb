@@ -1,6 +1,5 @@
 <h1>Create a new gem</h1>
 
-<%= @conversation.inspect %>
 <% if @conversation.errors.any? %>
   <% @conversation.errors.full_messages.each do |message|%>\
   <h3><%= message %> </h3>
@@ -11,14 +10,6 @@
   <%= f.label :title %>
   <%= f.text_field :title %>
   <%= f.hidden_field :group_id %>
-  <br>
-  <%= f.fields_for :messages, @conversation.messages, :url => { :action => 'create_message'} do |mf| %>
-    <%= mf.label :content %>
-    <%= mf.text_field :content %>
-    <%= mf.label :member %>
-    <%= mf.collection_select :member_id, @members, :id, :nick_name  %>
-    <br>
-  <% end %>
   <br>
   <%= f.submit "Create gem", class: "btn btn-primary" %>
 <% end %>
