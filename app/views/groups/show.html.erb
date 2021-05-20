@@ -1,8 +1,19 @@
 <h1><%= @group.name %></h1>
 <h2>Admin: <%= @group.user.nick_name %></h2>
+<ul>
+  <% @group.members.each do |member| %>
+    <li><%= member.nick_name %></li>
+  <% end %>
+</ul>
 <%= link_to "Add a new gem", new_group_conversation_path(@group), class: "btn btn-primary"  %>
 <ul>
   <% @conversations.each do |convo| %>
     <li><%= convo.title %></li>
+    <ul>
+      <% convo.messages.each do |message| %>
+        <li><%= message.member.nick_name %> - <%= message.content %></li>
+      <% end %>
+    </ul>
+    
   <% end %>
 </ul>

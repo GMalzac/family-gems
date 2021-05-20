@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_19_165535) do
+ActiveRecord::Schema.define(version: 2021_05_20_133438) do
 
   create_table "conversations", force: :cascade do |t|
     t.string "title"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 2021_05_19_165535) do
     t.string "nick_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "group_id", null: false
+    t.index ["group_id"], name: "index_members_on_group_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -45,6 +47,8 @@ ActiveRecord::Schema.define(version: 2021_05_19_165535) do
     t.integer "member_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "conversation_id", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["member_id"], name: "index_messages_on_member_id"
   end
 
@@ -64,5 +68,7 @@ ActiveRecord::Schema.define(version: 2021_05_19_165535) do
   add_foreign_key "conversations", "groups"
   add_foreign_key "conversations", "users"
   add_foreign_key "groups", "users"
+  add_foreign_key "members", "groups"
+  add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "members"
 end
