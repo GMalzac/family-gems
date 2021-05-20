@@ -1,12 +1,17 @@
-<h1>Conversations</h1>
+<h1>Family gems</h1>
 <% if user_signed_in? %>
   <%= link_to "Create a new group", new_group_path %>
-  <h2>Your groups</h2>
-  <ul>
-    <% @admin_groups.each do |group| %>
-      <li> <%= group.name %> - <%= link_to "Add a new gem", new_group_conversation_path(group), class: "btn btn-primary btn-sm"  %></li>
-    <% end %>
-  </ul>
+  <br>
+  <% if user_signed_in? && current_user.groups.any? %>
+    <h2>Your groups</h2>
+    <ul>
+      <% @admin_groups.each do |group| %>
+        <li> <%= group.name %> - <%= link_to "Add a new gem", new_group_conversation_path(group), class: "btn btn-primary btn-sm"  %></li>
+      <% end %>
+    </ul>
+  <% elsif !user_signed_in? %>
+    <%= link_to "Log in or Sign up", new_user_session_path %>
+  <% end %>
 <% end %>
 
 <h2>Conversations</h2>

@@ -3,8 +3,8 @@ class ConversationsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
 
   def index
-    @admin_groups = Group.where(user_id: current_user.id)
-    @conversations = Conversation.all
+    @admin_groups = Group.where(user_id: current_user.id) if user_signed_in?
+    @conversations = Conversation.all.order(created_at: :desc)
   end
 
   def new
