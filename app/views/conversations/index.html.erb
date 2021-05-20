@@ -2,11 +2,25 @@
   <h1>Conversations</h1>
   <% if user_signed_in? %>
     <%= link_to "Create a new group", new_group_path %>
+    <h2>Your groups</h2>
+    <ul>
+      <% @admin_groups.each do |group| %>
+        <li> <%= group.name %> - <%= link_to "Add a new gem", new_group_conversation_path(group), class: "btn btn-primary btn-sm"  %></li>
+      <% end %>
+    </ul>
   <% end %>
+
+  <h2>Conversations</h2>
   <ul>
     <% @conversations.each do |convo| %>
       <li><%= convo.title %></li>
+      <ul>
+        <% convo.messages.each do |message| %>
+          <li><%= message.member.nick_name %> - <%= message.content %></li>
+        <% end %>
+      </ul>
     <% end %>
   </ul>
+
   
 </div>
