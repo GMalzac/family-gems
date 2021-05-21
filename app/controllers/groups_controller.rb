@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   def index
-    @admin_groups = Groupe.where(user_id: current_user.id)
+    @admin_groups = Group.where(user_id: current_user.id)
   end
 
   def new
