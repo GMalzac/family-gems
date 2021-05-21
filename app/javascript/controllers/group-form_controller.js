@@ -4,4 +4,8 @@ export default class extends Controller {
   initialize() {
     console.log('Hey there!')
   }
+  newlyCreatedGroups(event) {
+    console.log(event)
+    console.log('yo')
+  }
 }

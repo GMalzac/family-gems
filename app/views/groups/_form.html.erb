@@ -4,10 +4,14 @@
     <h3><%= message %> </h3>
     <%end%>
   <%end%>
+  
+  <span data-target='group-form.name'>
+    <%#= group.name %>  
+  </span>
 
   <%= form_with model: @group do |f| %>
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, 'data-target' => 'group-form.name', 'data-action' => 'keyup->group-form#newlyCreatedGroups' %>
     <%= f.submit "Create group", class: "btn btn-primary" %>
   <% end %>
 </div>
