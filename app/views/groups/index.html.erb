@@ -1,17 +1,12 @@
 <h1>Your groups</h1>
 
-<% if user_signed_in? %>
-  <%= link_to "Create a new group", new_group_path %>
-  <br>
-  <% if user_signed_in? && current_user.groups.any? %>
-    <ul>
-      <% @admin_groups.each do |group| %>
-        <li> <%= group.name %> - <%= link_to "Add a new gem", new_group_conversation_path(group), class: "btn btn-primary btn-sm"  %></li>
-      <% end %>
-    </ul>
-  <% elsif !user_signed_in? %>
-    <%= link_to "Log in or Sign up", new_user_session_path %>
-  <% end %>
+<%= turbo_stream_from "groups" %>
+
+<%= turbo_frame_tag "group_form" do %>
+  <%= render "form", group: @group %>
 <% end %>
 
-<%= render "form" %>
+<%= turbo_frame_tag "groups" do %>
+  <%= render @admin_groups %>
+<% end %>
+

@@ -1,0 +1,5 @@
+<ul>
+  <%= turbo_frame_tag dom_id(group) do %>
+    <li><%= link_to group.name, group_path(group) %></li>
+  <% end %>
+</ul>

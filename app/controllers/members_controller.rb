@@ -1,5 +1,10 @@
   require 'pry'
 class MembersController < ApplicationController
+  def index
+    @group = Group.find(member_params.group_id)
+    @member.where(group_id: @group.id)
+  end
+  
   def new
     @group = Group.find(params[:group_id])
     @member = Member.new(group: @group)
@@ -15,7 +20,7 @@ class MembersController < ApplicationController
       render :new
     end
   end
-  
+
   private
   
   def member_params

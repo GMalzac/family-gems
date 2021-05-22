@@ -1,11 +1,16 @@
 <h1><%= @group.name %></h1>
 <h2>Admin: <%= @group.user.nick_name %></h2>
-<ul>
-  <% @group.members.each do |member| %>
-    <li><%= member.nick_name %></li>
-  <% end %>
-</ul>
-<%= link_to "Add members", new_group_member_path(@group), class: "btn btn-primary"  %>
+
+<%= turbo_stream_from "members" %>
+
+<%= turbo_frame_tag "member_form" do%>
+  <%= render "member_form", member: @member %>
+<% end %>
+
+<%= turbo_frame_tag "members" do %>
+  <%= render @members %>
+<% end %>
+
 <%= link_to "Add a new gem", new_group_conversation_path(@group), class: "btn btn-primary"  %>
 <ul>
   <% @conversations.each do |convo| %>

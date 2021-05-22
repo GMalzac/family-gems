@@ -1,17 +1,12 @@
-<div data-controller="group-form">
-  <% if @group.errors.any? %>
-    <% @group.errors.full_messages.each do |message|%>\
-    <h3><%= message %> </h3>
-    <%end%>
+<% if @group.errors.any? %>
+  <% @group.errors.full_messages.each do |message|%>\
+  <h3><%= message %> </h3>
   <%end%>
-  
-  <span data-target='group-form.name'>
-    <%#= group.name %>  
-  </span>
+<%end%>
 
-  <%= form_with model: @group do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name, 'data-target' => 'group-form.name', 'data-action' => 'keyup->group-form#newlyCreatedGroups' %>
-    <%= f.submit "Create group", class: "btn btn-primary" %>
-  <% end %>
-</div>
+<%= form_with model: @group do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit "Create group", class: "btn btn-primary" %>
+<% end %>
+
